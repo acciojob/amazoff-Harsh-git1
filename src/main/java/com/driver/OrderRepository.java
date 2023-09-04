@@ -18,7 +18,30 @@ public class OrderRepository {
 
 
     public void addOrder(Order order) {
-        orders.put(order.getId(), order);
+
+        int time = order.getDeliveryTime();
+
+        String string = "";
+
+        int m = time%60;
+        int h = time/60;
+
+        if(h < 10) {
+            string += '0'+h;
+        }else {
+            string += h;
+        }
+        string += ':';
+
+        if(m < 10) {
+            string += '0'+m;
+        }else {
+            string += m;
+        }
+
+        Order newOrder = new Order(order.getId(), string);
+        orders.put(order.getId(), newOrder);
+
     }
 
     public void addPartner(String partnerId) {
