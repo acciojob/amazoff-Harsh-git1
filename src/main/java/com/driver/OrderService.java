@@ -54,7 +54,7 @@ public class OrderService {
 
     public Integer getOrdersLeftAfterGivenTimeByPartnerId(String time, String partnerId) {
 
-        return getOrdersLeftAfterGivenTimeByPartnerId(time, partnerId);
+        return orderRepository.getOrdersLeftAfterGivenTimeByPartnerId(time, partnerId);
     }
 
     public void deletePartnerById(String partnerId) {

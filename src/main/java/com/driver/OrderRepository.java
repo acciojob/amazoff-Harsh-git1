@@ -24,12 +24,12 @@ public class OrderRepository {
         orderAssignedToPartner = 0;
         orderPartnerHashMap = new HashMap<>();
     }
+
     public void addOrder(Order order) {
         orders.put(order.getId(), order);
     }
 
     public void addPartner(String partnerId) {
-
         DeliveryPartner deliveryPartner = new DeliveryPartner(partnerId);
         partnerOrderHashMap.put(partnerId, new ArrayList<>());
         partners.put(partnerId, deliveryPartner);
@@ -53,7 +53,7 @@ public class OrderRepository {
     }
 
     public Integer getOrderCountByPartnerId(String partnerId) {
-        return partnerOrderHashMap.get(partnerId).size();
+        return partners.get(partnerId).getNumberOfOrders();
     }
 
     public List<String> getOrdersByPartnerId(String partnerId) {
