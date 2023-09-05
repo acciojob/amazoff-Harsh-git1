@@ -49,12 +49,13 @@ public class OrderRepository {
     }
 
     public void addOrderPartnerPair(String orderId, String partnerId) {
-        partnerOrderHashMap.get(partnerId).add(orderId);
-        partners.get(partnerId).setNumberOfOrders(partners.get(partnerId).getNumberOfOrders()+1);
+        if(orders.containsKey(orderId) && partners.containsKey(partnerId)) {
+            partnerOrderHashMap.get(partnerId).add(orderId);
+            partners.get(partnerId).setNumberOfOrders(partners.get(partnerId).getNumberOfOrders() + 1);
 
-        orderPartnerHashMap.put(orderId , partnerId);
-        orderAssignedToPartner++;
-
+            orderPartnerHashMap.put(orderId, partnerId);
+            orderAssignedToPartner++;
+        }
     }
 
     public Order getOrderById(String orderId) {
