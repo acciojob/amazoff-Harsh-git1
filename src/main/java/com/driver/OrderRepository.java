@@ -10,12 +10,20 @@ import java.util.List;
 @Repository
 public class OrderRepository {
 
-    private HashMap<String , Order> orders = new HashMap<>();;
-    private HashMap<String , DeliveryPartner> partners = new HashMap<>();;
-    private HashMap<String, List<String>> partnerOrderHashMap = new HashMap<>();
-    private HashMap<String, String> orderPartnerHashMap = new HashMap<>();
-    private Integer orderAssignedToPartner = 0;
 
+    private HashMap<String , Order> orders;
+    private HashMap<String , DeliveryPartner> partners;
+    private HashMap<String, List<String>> partnerOrderHashMap;
+    private HashMap<String, String> orderPartnerHashMap;
+    private Integer orderAssignedToPartner;
+
+    public OrderRepository() {
+        orders = new HashMap<>();
+        partners = new HashMap<>();
+        partnerOrderHashMap = new HashMap<>();
+        orderPartnerHashMap = new HashMap<>();
+        orderAssignedToPartner = 0;
+    }
 
     public void addOrder(Order order) {
 
