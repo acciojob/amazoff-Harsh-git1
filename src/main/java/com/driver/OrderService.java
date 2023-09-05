@@ -25,6 +25,7 @@ public class OrderService {
 
 
     public Order getOrderById(String orderId) {
+
         return orderRepository.getOrderById(orderId);
     }
 
@@ -68,20 +69,22 @@ public class OrderService {
     public String getLastDeliveryTimeByPartnerId(String partnerId) {
 
         int time = orderRepository.getLastDeliveryTimeByPartnerId(partnerId);
+        System.out.println(time);
         String string = "";
 
-        int m = time%60;
-        int h = time/60;
+       int h = time/60;
+
+       int m = time%60;
 
         if(h < 10) {
-            string += '0'+h;
+            string += "0" + h;
         }else {
             string += h;
         }
         string += ':';
 
         if(m < 10) {
-            string += '0'+m;
+            string += "0"+m;
         }else {
             string += m;
         }

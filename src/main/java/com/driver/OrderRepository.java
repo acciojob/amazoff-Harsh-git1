@@ -19,28 +19,26 @@ public class OrderRepository {
 
     public void addOrder(Order order) {
 
-        int time = order.getDeliveryTime();
+       orders.put(order.getId(), order);
 
-        String string = "";
+//        String string = "";
+//
+//        int m = time%60;
+//        int h = time/60;
+//
+//        if(h < 10) {
+//            string += '0'+h;
+//        }else {
+//            string += h;
+//        }
+//        string += ':';
+//
+//        if(m < 10) {
+//            string += '0'+m;
+//        }else {
+//            string += m;
+//        }
 
-        int m = time%60;
-        int h = time/60;
-
-        if(h < 10) {
-            string += '0'+h;
-        }else {
-            string += h;
-        }
-        string += ':';
-
-        if(m < 10) {
-            string += '0'+m;
-        }else {
-            string += m;
-        }
-
-        Order newOrder = new Order(order.getId(), string);
-        orders.put(order.getId(), newOrder);
 
     }
 
@@ -111,20 +109,25 @@ public class OrderRepository {
 
     public void deleteOrderById(String orderId) {
 
-        String partnerId = orderPartnerHashMap.get(orderId);
-        orderPartnerHashMap.remove(orderId);
-        List<String> orderList = partnerOrderHashMap.get(partnerId);
-        int idx = 0;
-        for(int i=0; i<orderList.size(); i++) {
-            if(orderList.get(i).equals(orderId)) {
-                idx = i;
-                break;
-            }
-        }
-        orderList.remove(idx);
 
-        partners.get(partnerId).setNumberOfOrders(partners.get(partnerId).getNumberOfOrders() - 1);
-        orderAssignedToPartner--;
+        if(orderPartnerHashMap.containsKey(orderId)) {
+            String partnerId = orderPartnerHashMap.get(orderId);
+            orderPartnerHashMap.remove(orderId);
+            List<String> orderList = partnerOrderHashMap.get(partnerId);
+            int idx = 0;
+            for (int i = 0; i < orderList.size(); i++) {
+                if (orderList.get(i).equals(orderId)) {
+                    idx = i;
+                    break;
+                }
+            }
+            orderList.remove(idx);
+
+            partners.get(partnerId).setNumberOfOrders(partners.get(partnerId).getNumberOfOrders() - 1);
+            orderAssignedToPartner--;
+        }
+
+
         orders.remove(orderId);
     }
 
